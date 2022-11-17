@@ -1,7 +1,7 @@
 # StripePay
 1. Выполнить git clone https://github.com/MratOO/StripePay.git
-2. Выполнить cd StripePay
-3. Создать виртуальное окружение если нужно
+2. Создать виртуальное окружение если нужно
+3. Выполнить cd StripePay
 4. Выполнить pip install -r req.txt
 5. Выполнить команду python manage.py runserver
 6. Перейти по адресу http://127.0.0.1:8000/item/1/
