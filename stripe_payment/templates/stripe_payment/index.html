@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buy cool new product</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+  </head>
+  <body>
+    <section>
+      <div class="product">
+        <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+        <div class="description">
+          <h3>{{ item_detail.name }}</h3>
+          <h5>{{ item_detail.price }}</h5>
+        </div>
+      </div>
+      <form action="{% url 'buy' item_detail.id %}" method="get">
+          <button type="submit" id="buy-button">Buy</button>
+      </form>
+    </section>
+  </body>
+  <script type="text/javascript">
+    var stripe = Stripe('pk_test_51M2ZfVIgZERp7ZUxLTOdTkatOHLxUCzPcfXmTFqAZBPRt800Q5aGE3N08UW5VY7x1Evc5tQGgQfoobY3cdkoS82j00RV4yl1Yx');
+    var buyButton = document.getElementById('buy-button');
+    buyButton.addEventListener('click', function () {
+      fetch('{% url "buy" item_detail.id %}', { method: 'GET' })
+        .then(response => {return response.json()})
+        .then(session => stripe.redirectToCheckout({ sessionId: session.id }))
+  
+    });
+  </script>
+</html>
